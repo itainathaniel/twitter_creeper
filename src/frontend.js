@@ -1,6 +1,6 @@
 // TODO:
-const API_ENDPOINT = "https://creeper-twitter.herokuapp.com"
-// const API_ENDPOINT = "https://41713b36.ngrok.io"
+const API_ENDPOINT = "https://creeper-twitter.herokuapp.com/api/v1"
+// const API_ENDPOINT = "https://41713b36.ngrok.io/api/v1"
 class CreeperMessage {
   constructor (elm) {
     this.username = null
@@ -39,7 +39,7 @@ class CreeperMessage {
     this.reportButton.innerText = '8=>'
     $(this.reportButton).on('click', (e) => {
       e.preventDefault()
-      $.post(API_ENDPOINT + "/api/v1/reports",
+      $.post(API_ENDPOINT + "/reports",
         {
           reporter_id: document.creeper.me,
           creep_id: this.username
@@ -79,7 +79,7 @@ class Creeper {
   }
   checkForCreepers () {
     let that = this
-    $.get(API_ENDPOINT + "/api/v1/reports", {
+    $.get(API_ENDPOINT + "/reports", {
       creeper_ids: [...new Set(that.usernames)].join(','),
     }).done((data) => {
       that.usernames.forEach((username) => {
